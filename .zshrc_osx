@@ -18,14 +18,12 @@ export EDITOR='code --wait'
 # Should your editor deal with streamed vs on disk files differently, also set...
 export K9S_EDITOR='code --wait'
 
+#kubectl autocomplete 
 source <(kubectl completion zsh)
 
-# oh-my-posh
-# https://ohmyposh.dev/docs/installation/linux
-if [ $TERM_PROGRAM != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh)"
-  eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/kali.omp.json)"
-fi
+# AZ autocomplete 
+autoload -U +X bashcompinit && bashcompinit
+source /usr/local/etc/bash_completion.d/az
 
 # -- MANUAL STEPS --
 ## Source this file in the default .zshrc
@@ -33,3 +31,12 @@ fi
 #
 # Download iTerm Materials theme from inside this zsh theme:
 # https://github.com/carloscuesta/materialshell/tree/master/shell-color-themes#iterm
+# Install oh-my-zsh 
+# https://ohmyz.sh/#install
+
+# my plugins 
+plugins=(git thefuck kubectl kubectx)
+eval $(thefuck --alias)
+# Install ZSH theme git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+# https://github.com/romkatv/powerlevel10k#installation
+
