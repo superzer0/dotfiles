@@ -7,11 +7,6 @@ alias listening="lsof -i -P | grep -i 'listen'"
 
 # -- Git --
 alias gl="git log --color --graph --decorate"
-alias gp="git push"
-alias gc="git checkout"
-alias gd="git diff"
-alias gs="git status"
-alias gpr="git pull --rebase"
 alias gforce="git push --force-with-lease"
 
 # -- Containers --
