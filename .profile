@@ -19,3 +19,8 @@ export EDITOR='code --wait'
 # Should your editor deal with streamed vs on disk files differently, also set...
 export K9S_EDITOR='code --wait'
 complete -F __start_kubectl k
+
+# oh-my-posh
+# https://ohmyposh.dev/docs/installation/linux
+eval "$(oh-my-posh init bash)"
+eval "$(oh-my-posh init bash --config $(brew --prefix oh-my-posh)/themes/kali.omp.json)"

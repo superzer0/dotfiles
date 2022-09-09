@@ -20,9 +20,16 @@ export K9S_EDITOR='code --wait'
 
 source <(kubectl completion zsh)
 
+# oh-my-posh
+# https://ohmyposh.dev/docs/installation/linux
+if [ $TERM_PROGRAM != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh)"
+  eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/kali.omp.json)"
+fi
+
 # -- MANUAL STEPS --
 ## Source this file in the default .zshrc
-# echo "\n\n# Personal config\nsource ~/repo/dotfiles/zshrc_osx\n" >> ~/.zshrc
+# echo "\n\n# Personal config\nsource ~/repo/dotfiles/.zshrc_osx\n" >> ~/.zshrc
 #
 # Download iTerm Materials theme from inside this zsh theme:
 # https://github.com/carloscuesta/materialshell/tree/master/shell-color-themes#iterm
