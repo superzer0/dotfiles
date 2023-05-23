@@ -23,5 +23,3 @@ complete -F __start_kubectl k
 # https://ohmyposh.dev/docs/installation/linux
 eval "$(oh-my-posh init bash)"
 eval "$(oh-my-posh init bash --config $(brew --prefix oh-my-posh)/themes/kali.omp.json)"
-
-eval $(thefuck --alias)

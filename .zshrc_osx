@@ -19,7 +19,6 @@ export K9S_EDITOR='code --wait'
 
 #kubectl autocomplete 
 source <(kubectl completion zsh)
-eval $(thefuck --alias)
 
 # AZ autocomplete 
 autoload -U +X bashcompinit && bashcompinit
@@ -31,7 +30,7 @@ if [ -f "/etc/bash_completion.d/azure-cli" ] ; then
 fi
 
 # my plugins 
-plugins=(git kubectl kubectx helm)
+# plugins=(git kubectl kubectx helm) copy to ZSHRC
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
