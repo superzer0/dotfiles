@@ -17,23 +17,28 @@ export EDITOR='code --wait'
 # Should your editor deal with streamed vs on disk files differently, also set...
 export K9S_EDITOR='code --wait'
 
+# brew autocomplete for zsh
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  autoload -Uz compinit
+  compinit
+  autoload -U +X bashcompinit && bashcompinit
+fi
+
 #kubectl autocomplete
 source <(kubectl completion zsh)
 
 # AZ autocomplete
-autoload -U +X bashcompinit && bashcompinit
-if [ -f "/usr/local/etc/bash_completion.d/az" ] ; then
-    source /usr/local/etc/bash_completion.d/az
-fi
-if [ -f "/etc/bash_completion.d/azure-cli" ] ; then
-    source /etc/bash_completion.d/azure-cli
-fi
+source $(brew --prefix)/etc/bash_completion.d/az
 
 # my plugins
 plugins=(git kubectl kubectx helm)
 
+# -- Powerlevel10k --
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
@@ -45,7 +50,9 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # https://github.com/carloscuesta/materialshell/tree/master/shell-color-themes#iterm
 # Install oh-my-zsh
 # https://ohmyz.sh/#install
-# Install ZSH theme git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+# Install ZSH theme git clone --depth=1 https://github.com/romkatv/powerlevel10k.git
 # https://github.com/romkatv/powerlevel10k#installation
-
+# set ZSH_THEME="powerlevel10k/powerlevel10k" in .zshrc
+# link ~/repo/dotfiles/.pk10k.zsh ~/.pk10k.zsh
+# install fonts: https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#meslo-nerd-font-patched-for-powerlevel10k
 
