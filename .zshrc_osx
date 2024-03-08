@@ -17,10 +17,10 @@ export EDITOR='code --wait'
 # Should your editor deal with streamed vs on disk files differently, also set...
 export K9S_EDITOR='code --wait'
 
-#kubectl autocomplete 
+#kubectl autocomplete
 source <(kubectl completion zsh)
 
-# AZ autocomplete 
+# AZ autocomplete
 autoload -U +X bashcompinit && bashcompinit
 if [ -f "/usr/local/etc/bash_completion.d/az" ] ; then
     source /usr/local/etc/bash_completion.d/az
@@ -29,11 +29,13 @@ if [ -f "/etc/bash_completion.d/azure-cli" ] ; then
     source /etc/bash_completion.d/azure-cli
 fi
 
-# my plugins 
-# plugins=(git kubectl kubectx helm) copy to ZSHRC
+# my plugins
+plugins=(git kubectl kubectx helm)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # -- MANUAL STEPS --
 ## Source this file in the default .zshrc
@@ -41,7 +43,7 @@ fi
 #
 # Download iTerm Materials theme from inside this zsh theme:
 # https://github.com/carloscuesta/materialshell/tree/master/shell-color-themes#iterm
-# Install oh-my-zsh 
+# Install oh-my-zsh
 # https://ohmyz.sh/#install
 # Install ZSH theme git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 # https://github.com/romkatv/powerlevel10k#installation
