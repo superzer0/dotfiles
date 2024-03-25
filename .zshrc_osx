@@ -1,22 +1,3 @@
-alias ls="lsd -alh --color=auto"
-alias l="lsd -lh --color=auto"
-
-#Other:
-alias listening="lsof -i -P | grep -i 'listen'"
-
-# -- Git --
-alias g="git"
-alias gpr="git pull --rebase"
-alias gforce="git push --force-with-lease"
-
-# -- Containers --
-alias d="docker"
-alias k="kubectl"
-# Kubectl edit command will use this env var.
-export EDITOR='code --wait'
-# Should your editor deal with streamed vs on disk files differently, also set...
-export K9S_EDITOR='code --wait'
-
 # brew autocomplete for zsh
 if type brew &>/dev/null
 then
@@ -40,7 +21,30 @@ plugins=(git kubectl kubectx helm)
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+eval "$(gh copilot alias -- zsh)"
+
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+alias ls="lsd -alh --color=auto"
+alias l="lsd -lh --color=auto"
+
+#Other:
+alias listening="lsof -i -P | grep -i 'listen'"
+
+# -- Git --
+alias g="git"
+alias gpr="git pull --rebase"
+alias gforce="git push --force-with-lease"
+
+# -- Containers --
+alias d="docker"
+alias k="kubectl"
+# Kubectl edit command will use this env var.
+export EDITOR='code --wait'
+# Should your editor deal with streamed vs on disk files differently, also set...
+export K9S_EDITOR='code --wait'
+
+
 
 # -- MANUAL STEPS --
 ## Source this file in the default .zshrc
