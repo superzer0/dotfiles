@@ -12,6 +12,7 @@ alias gforce="git push --force-with-lease"
 # -- Containers --
 alias d="docker"
 alias k="kubectl"
+alias tf="terraform"
 
 # Kubectl edit command will use this env var.
 export EDITOR='code --wait'
