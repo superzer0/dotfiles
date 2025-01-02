@@ -11,5 +11,15 @@ Private dotfiles
 <https://thoughtbot.com/blog/brewfile-a-gemfile-but-for-homebrew>
 
 ```sh
-brew bundle 
+brew bundle
 ```
+
+## Font
+
+```sh
+oh-my-posh font install Meslo
+```
+
+Use `MesloLGM Nerd Font`
+
+More at [Oh My Posh Instruction](https://ohmyposh.dev/docs/installation/fonts#configuration)
