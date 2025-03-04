@@ -8,6 +8,7 @@ alias listening="lsof -i -P | grep -i 'listen'"
 alias g="git"
 alias gpr="git pull --rebase"
 alias gforce="git push --force-with-lease"
+alias glog="git log --oneline --graph --decorate --all"
 
 # -- Containers --
 alias d="docker"
