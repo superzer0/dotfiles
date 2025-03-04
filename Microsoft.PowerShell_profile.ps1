@@ -4,7 +4,8 @@ $ENV:KUBE_EDITOR='code -w'
 # -- Git --
 Set-Alias -Name g -Value "git"
 Set-Alias -Name gforce -Value "git push --force-with-lease"
-Set-Alias -Name glog -Value "git log --oneline --graph --decorate --all"
+
+function glog {git log --oneline --graph --decorate --all}
 
 Set-Alias -Name d -Value "docker"
 Set-Alias -Name k -Value "kubectl"
