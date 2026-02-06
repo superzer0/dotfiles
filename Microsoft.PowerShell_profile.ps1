@@ -1,3 +1,6 @@
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+
 # COPY TO $PROFILE location
 $ENV:KUBE_EDITOR='code -w'
 
