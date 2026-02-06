@@ -1,0 +1,23 @@
+
+winget install --id Docker.DockerDesktop --source winget --disable-interactivity 
+winget install --id Microsoft.PowerToys --source winget --disable-interactivity 
+winget install --id Microsoft.VisualStudioCode --source winget --disable-interactivity 
+winget install --id Microsoft.PowerShell --source winget --disable-interactivity 
+winget install --id 7zip.7zip --source winget --disable-interactivity 
+winget install --id Microsoft.DotNet.SDK.10 --source winget --disable-interactivity 
+winget install --id Microsoft.Git --source winget --disable-interactivity 
+winget install --id Ubiquiti.WiFimanDesktop --source winget --disable-interactivity 
+winget install --id GitHub.cli --source winget --disable-interactivity 
+winget install --id Microsoft.AzureCLI --source winget --disable-interactivity 
+winget install --id Microsoft.Edit --source winget --disable-interactivity 
+winget install --id Derailed.k9s --source winget --disable-interactivity 
+winget install --id MikeFarah.yq --source winget --disable-interactivity 
+winget install --id Obsidian.Obsidian --source winget --disable-interactivity 
+winget install --id magic-wormhole.magic-wormhole --source winget --disable-interactivity 
+winget install --id jqlang.jq --source winget --disable-interactivity 
+winget install --id Logitech.OptionsPlus --source winget --disable-interactivity 
+winget install --id Jabra.Direct --source winget --disable-interactivity 
+winget install --id Google.Chrome --source winget --disable-interactivity 
+winget install --id Mozilla.Firefox --source winget --disable-interactivity 
+winget install --id Notepad++.Notepad++ --source winget --disable-interactivity 
+winget install --id JanDeDobbeleer.OhMyPosh --source winget --disable-interactivity 
