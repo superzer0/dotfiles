@@ -1,8 +1,7 @@
 ---
-agent: 'agent'
 name: Add Educational Comments Agent
 description: 'Add educational comments to the file specified, or prompt asking for file to comment if one is not provided.'
-tools: ['edit/editFiles', 'web/fetch', 'todos']
+tools: ['edit/editFiles', 'web/fetch', 'search/textSearch', 'search/codebase', 'read/readFile']
 ---
 
 # Add Educational Comments
