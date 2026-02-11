@@ -2,7 +2,6 @@
 agent: 'agent'
 description: 'Create tldr summaries for GitHub Copilot files (prompts, agents, instructions, collections), MCP servers, or documentation from URLs and queries.'
 tools: ['web/fetch', 'search/readFile', 'search', 'search/textSearch']
-model: 'claude-sonnet-4'
 ---
 
 # TLDR Prompt
