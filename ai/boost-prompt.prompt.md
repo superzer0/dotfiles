@@ -1,5 +1,6 @@
 ---
 agent: agent
+name: Boost Prompt Refinement Agent
 description: 'Interactive prompt refinement workflow: interrogates scope, deliverables, constraints; copies final markdown to clipboard; never writes code. Requires the Joyride extension.'
 ---
 
