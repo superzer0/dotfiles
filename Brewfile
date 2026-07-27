@@ -9,7 +9,7 @@ brew "lsd"
 brew "kubernetes-cli"
 brew "kubectx"
 brew "nmap"
-brew "node"
+brew "node@24"
 brew "nvm"
 brew "terraform", link: false
 brew "tree"
