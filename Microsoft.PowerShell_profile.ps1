@@ -28,7 +28,6 @@ if (Get-Command "kubectl" -ErrorAction SilentlyContinue) {
 
 if (Get-Command "oh-my-posh" -ErrorAction SilentlyContinue) {
   # Install https://ohmyposh.dev/docs/installation/windows
-  oh-my-posh init pwsh | Invoke-Expression
   oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/kali.omp.json" | Invoke-Expression
 }
 
