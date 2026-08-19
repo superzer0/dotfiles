@@ -1,0 +1,10 @@
+{{- template "shell/common.sh" . }}
+
+if command -v kubectl >/dev/null 2>&1; then
+  source <(kubectl completion bash)
+  complete -F __start_kubectl k
+fi
+
+if command -v oh-my-posh >/dev/null 2>&1; then
+  eval "$(oh-my-posh init bash)"
+fi

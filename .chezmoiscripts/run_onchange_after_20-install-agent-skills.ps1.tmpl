@@ -1,0 +1,30 @@
+{{- if and .installAgentTools (eq .chezmoi.os "windows") }}
+$ErrorActionPreference = 'Stop'
+
+if (-not (Get-Command npx -ErrorAction SilentlyContinue)) {
+  throw 'npx is required to install agent skills. Apply the package installation script first.'
+}
+
+$skills = @(
+{{- range .agentSkills }}
+  [pscustomobject]@{ Name = '{{ .name }}'; Repository = '{{ .repository }}' }
+{{- end }}
+)
+
+foreach ($skill in $skills) {
+  $installed = @(
+    (Join-Path $HOME ".agents/skills/$($skill.Name)"),
+    (Join-Path $HOME ".claude/skills/$($skill.Name)")
+  ) | Where-Object { Test-Path -LiteralPath $_ }
+
+  if ($installed.Count -gt 0) {
+    Write-Host "Skipping '$($skill.Name)' (already installed)."
+    continue
+  }
+
+  npx --yes skills add $skill.Repository --skill $skill.Name -a claude-code -a codex -a github-copilot -g -y
+  if ($LASTEXITCODE -ne 0) {
+    throw "Failed to install agent skill '$($skill.Name)' with exit code $LASTEXITCODE."
+  }
+}
+{{- end }}

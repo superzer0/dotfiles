@@ -1,0 +1,26 @@
+{{- if eq .chezmoi.os "windows" }}
+$ErrorActionPreference = 'Stop'
+
+if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+  throw 'winget is required before chezmoi can install Windows packages.'
+}
+
+$packages = @(
+{{- range .packages.windows.winget }}
+  '{{ . }}'
+{{- end }}
+)
+
+foreach ($package in $packages) {
+  winget list --id $package --exact --accept-source-agreements --disable-interactivity | Out-Null
+  if ($LASTEXITCODE -eq 0) {
+    Write-Host "Skipping '$package' (already installed)."
+    continue
+  }
+
+  winget install --id $package --exact --source winget --accept-package-agreements --accept-source-agreements --disable-interactivity
+  if ($LASTEXITCODE -ne 0) {
+    throw "winget failed to install '$package' with exit code $LASTEXITCODE."
+  }
+}
+{{- end }}
