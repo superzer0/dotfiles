@@ -1,0 +1,23 @@
+{{- if eq .chezmoi.os "darwin" }}
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo 'Homebrew is required before chezmoi can install macOS packages.' >&2
+  exit 1
+fi
+
+packages=(
+{{- range .packages.darwin.formulae }}
+  {{ . | quote }}
+{{- end }}
+)
+
+for package in "${packages[@]}"; do
+  if brew list --formula "$package" >/dev/null 2>&1; then
+    printf 'Skipping %s (already installed).\n' "$package"
+  else
+    brew install "$package"
+  fi
+done
+{{- end }}

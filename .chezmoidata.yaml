@@ -1,0 +1,81 @@
+machineRole: personal
+installAgentTools: true
+
+packages:
+  darwin:
+    formulae:
+      - bat
+      - bison
+      - curl
+      - dotnet
+      - gh
+      - git
+      - grep
+      - helm
+      - jq
+      - k9s
+      - kubectx
+      - kubernetes-cli
+      - lsd
+      - navi
+      - nmap
+      - node
+      - nvm
+      - terraform
+      - tldr
+      - tree
+      - unbound
+      - unzip
+      - wget
+      - yq
+  windows:
+    winget:
+      - 7zip.7zip
+      - Derailed.k9s
+      - Docker.DockerDesktop
+      - GitHub.cli
+      - Google.Chrome
+      - Jabra.Direct
+      - JanDeDobbeleer.OhMyPosh
+      - jqlang.jq
+      - Logitech.OptionsPlus
+      - magic-wormhole.magic-wormhole
+      - Microsoft.AzureCLI
+      - Microsoft.DotNet.SDK.10
+      - Microsoft.Edit
+      - Microsoft.Git
+      - Microsoft.PowerShell
+      - Microsoft.PowerToys
+      - Microsoft.VisualStudioCode
+      - MikeFarah.yq
+      - Mozilla.Firefox
+      - Notepad++.Notepad++
+      - Obsidian.Obsidian
+      - OpenJS.NodeJS.LTS
+      - Ubiquiti.WiFimanDesktop
+
+agentSkills:
+  - name: create-github-action-workflow-specification
+    repository: https://github.com/github/awesome-copilot
+  - name: multi-stage-dockerfile
+    repository: https://github.com/github/awesome-copilot
+  - name: azure-role-selector
+    repository: https://github.com/github/awesome-copilot
+  - name: az-cost-optimize
+    repository: https://github.com/github/awesome-copilot
+  - name: dependabot
+    repository: https://github.com/github/awesome-copilot
+  - name: foundry-agent-sync
+    repository: https://github.com/github/awesome-copilot
+  - name: find-skills
+    repository: https://github.com/vercel-labs/skills
+  - name: grill-me
+    repository: https://github.com/mattpocock/skills
+  - name: firecrawl
+    repository: https://github.com/firecrawl/cli
+  - name: editorconfig
+    repository: https://github.com/github/awesome-copilot
+  - name: github-actions-efficiency
+    repository: https://github.com/github/awesome-copilot
+  - name: github-actions-hardening
+    repository: https://github.com/github/awesome-copilot

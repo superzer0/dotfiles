@@ -1,0 +1,22 @@
+README.md
+LICENSE
+AGENTS.md
+.github/**
+.vscode/**
+tests/**
+JakubDefault.json
+ai/**
+
+{{- if ne .chezmoi.os "windows" }}
+Documents/PowerShell/**
+AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/**
+{{- end }}
+
+{{- if ne .chezmoi.os "darwin" }}
+.zshrc
+.p10k.zsh
+{{- end }}
+
+{{- if eq .chezmoi.os "windows" }}
+.profile
+{{- end }}

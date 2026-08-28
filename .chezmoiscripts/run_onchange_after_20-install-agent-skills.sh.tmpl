@@ -1,0 +1,17 @@
+{{- if and .installAgentTools (ne .chezmoi.os "windows") }}
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v npx >/dev/null 2>&1; then
+  echo 'npx is required to install agent skills. Apply the package installation script first.' >&2
+  exit 1
+fi
+
+{{- range .agentSkills }}
+if [[ -d "$HOME/.agents/skills/{{ .name }}" || -d "$HOME/.claude/skills/{{ .name }}" ]]; then
+  echo "Skipping '{{ .name }}' (already installed)."
+else
+  npx --yes skills add {{ .repository | quote }} --skill {{ .name | quote }} -a claude-code -a codex -a github-copilot -g -y
+fi
+{{- end }}
+{{- end }}
