@@ -1,0 +1,151 @@
+{
+  "model": "opus",
+  "effortLevel": "xhigh",
+  "advisorModel": "opus",
+  "theme": "auto",
+  "tui": "fullscreen",
+  "autoUpdatesChannel": "latest",
+  "remoteControlAtStartup": false,
+  "workflowKeywordTriggerEnabled": false,
+  "skipWorkflowUsageWarning": true,
+  "skipAutoPermissionPrompt": true,
+
+  "permissions": {
+    "defaultMode": "auto",
+    "allow": [
+      "Bash(terraform *)",
+      "Bash(helm *)",
+      "Bash(dotnet *)",
+      "Bash(pwsh *)",
+      "Bash(make *)",
+      "Bash(kubeconform *)"
+    ]
+  },
+
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /home/YOUR_USER/.claude/worktree-guard.sh",
+            "timeout": 10,
+            "statusMessage": "Checking worktree policy..."
+          }
+        ]
+      }
+    ]
+  },
+
+  "statusLine": {
+    "type": "command",
+    "command": "bash /home/YOUR_USER/.claude/statusline-command.sh"
+  },
+
+  "extraKnownMarketplaces": {
+    "context7-marketplace": {
+      "source": { "source": "github", "repo": "upstash/context7" }
+    },
+    "ponytail": {
+      "source": { "source": "github", "repo": "DietrichGebert/ponytail" }
+    },
+    "caveman": {
+      "source": { "source": "github", "repo": "JuliusBrussee/caveman" }
+    }
+  },
+
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "remember@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "claude-security@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "csharp-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "azure@claude-plugins-official": true,
+    "microsoft-docs@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "ponytail@ponytail": true,
+    "caveman@caveman": true
+  },
+
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com",
+        "*.githubusercontent.com",
+        "registry.terraform.io",
+        "releases.hashicorp.com",
+        "*.github.io",
+        "api.nuget.org",
+        "your-internal-host.example.com"
+      ],
+      "allowLocalBinding": true,
+      "allowAllUnixSockets": true,
+      "strictAllowlist": false
+    },
+    "filesystem": {
+      "allowWrite": [
+        "/home/YOUR_USER/repo/claude-worktrees",
+        "/home/YOUR_USER/.azure/commands",
+        "/home/YOUR_USER/.azure/az.sess",
+        "/home/YOUR_USER/.ansible/tmp",
+        "/home/YOUR_USER/.terraform.d",
+        "/home/YOUR_USER/.tflint.d",
+        "/home/YOUR_USER/.nuget",
+        "/home/YOUR_USER/.dotnet",
+        "/home/YOUR_USER/.cache/helm",
+        "/home/YOUR_USER/.config/helm",
+        "/home/YOUR_USER/.local/share/helm"
+      ]
+    }
+  },
+
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: assume private unless the remote host and repo name indicate otherwise",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: None configured",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Source control**: The trusted repo and its remote(s) only",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: None configured",
+      "**Trusted repo**: The git repository the agent started in",
+      "**Org-specific CLIs**: None configured"
+    ],
+    "soft_deny": [
+      "$defaults"
+    ]
+  }
+}
