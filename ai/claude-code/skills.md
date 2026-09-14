@@ -28,6 +28,27 @@ Installed state lives in `~/.agents/.skill-lock.json` (source URL, skill path
 inside the repo, folder hash, install/update timestamps). That file is worth
 backing up — it is the only record of which upstream path each skill came from.
 
+## Installing
+
+`../agent-skills-install.ps1`, or `../agent-skills-install.sh` on a machine
+without PowerShell. Both are idempotent and cover the full list above.
+
+Three things the installers handle that are easy to miss doing this by hand:
+
+- **`--full-depth` is not optional here.** A repository with a `SKILL.md` at its
+  root stops the scan there, and subdirectories are never searched.
+  `github/gh-aw` is exactly that case: without the flag it resolves to one skill
+  ("GitHub Agentic Workflows") and `--skill github-pr-query` fails with
+  `No matching skills found`, even though `.github/skills/github-pr-query`
+  exists upstream. The flag is a no-op for the other repositories here.
+- **`npx` reads stdin.** Driving the loop from a pipe or a heredoc on stdin lets
+  the first `npx skills add` swallow the rest of the list; the loop then ends
+  after one skill and still exits 0.
+- **"Already installed" must mean linked, not just present.** A skill can sit in
+  `~/.agents/skills/` with no symlink in `~/.claude/skills/`, in which case
+  Claude Code cannot see it. Testing only the store skips it and leaves it
+  invisible with nothing to explain why.
+
 ## Plugins
 
 Plugin marketplaces and the enabled plugin list are in `settings.json`
