@@ -22,7 +22,7 @@ where they get maintained (and where their own licences live).
 | `firecrawl` | https://github.com/firecrawl/cli |
 | `github-pr-query` | https://github.com/github/gh-aw |
 | `grill-me` | https://github.com/mattpocock/skills |
-| `microsoft-foundry` | https://github.com/microsoft/azure-skills |
+| `kql` | https://github.com/microsoft/skills |
 
 Installed state lives in `~/.agents/.skill-lock.json` (source URL, skill path
 inside the repo, folder hash, install/update timestamps). That file is worth
