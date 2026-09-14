@@ -39,8 +39,10 @@ Verify the hooks before trusting them:
 HOOKS_DIR=~/.claude/hooks bash ~/.claude/hooks/tests/hooks.test.sh
 ```
 
-46 cases, exit 0 = all good. Run it after any edit to a guard — a guard that
-silently stops guarding is worse than no guard.
+46 cases over the three Bash hooks (`merge-guard`, `cred-guard`, `rtk-hook`),
+exit 0 = all good. `worktree-guard.sh` is not covered — test it by hand, by
+trying an edit in a main checkout and again in a worktree. Re-check after any
+edit to a guard: one that silently stops guarding is worse than no guard.
 
 The memory files go under `~/.claude/projects/<project-slug>/memory/`, where the
 slug is your project directory with `/` replaced by `-` (e.g. `-home-me-repo`).
@@ -199,7 +201,7 @@ recall, so make it specific.
 
 ### `skills.md`
 
-The 16 skills I install, with their upstream repos. Bodies are not vendored — see
+The 17 skills I install, with their upstream repos. Bodies are not vendored — see
 that file for why.
 
 ## macOS notes

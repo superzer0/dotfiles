@@ -43,6 +43,7 @@ find-skills|https://github.com/vercel-labs/skills
 firecrawl|https://github.com/firecrawl/cli
 github-pr-query|https://github.com/github/gh-aw
 grill-me|https://github.com/mattpocock/skills
+kql|https://github.com/microsoft/skills
 microsoft-foundry|https://github.com/microsoft/azure-skills
 "
 
