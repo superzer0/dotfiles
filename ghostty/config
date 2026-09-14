@@ -1,0 +1,70 @@
+# Ghostty config — ported from iTerm2 profile "JakubDefault"
+# Source: Superzer0/dotfiles JakubDefault.json (Guid 8C9A85DE-C762-4658-9E37-2BC5E5A34C0D)
+# Install to: ~/.config/ghostty/config
+#
+# Colour note: the 16 ANSI colours below are the stock Tango palette, byte for
+# byte — the profile never had a custom scheme applied. `theme = Tango Dark`
+# would very likely be equivalent in one line; the explicit palette is kept so
+# this file does not depend on Ghostty's bundled theme names.
+
+# --- font ---
+# iTerm2: "MesloLGS-NF-Regular 12"
+font-family = MesloLGS NF
+font-size = 12
+# iTerm2 "Use Non-ASCII Font" was false, so "Monaco 12" is intentionally dropped.
+
+# --- palette (Ansi 0-15) ---
+palette = 0=#000000
+palette = 1=#cc0000
+palette = 2=#4e9a06
+palette = 3=#c4a000
+palette = 4=#3465a4
+palette = 5=#75507b
+palette = 6=#06989a
+palette = 7=#d3d7cf
+palette = 8=#555753
+palette = 9=#ef2929
+palette = 10=#8ae234
+palette = 11=#fce94f
+palette = 12=#729fcf
+palette = 13=#ad7fa8
+palette = 14=#34e2e2
+palette = 15=#eeeeec
+
+# --- window colours ---
+background = #000000
+foreground = #ffffff
+cursor-color = #ffffff
+cursor-text = #000000
+selection-background = #b5d5ff
+selection-foreground = #000000
+
+# --- behaviour ---
+# iTerm2 "Use Bright Bold" = true
+bold-is-bright = true
+# iTerm2 "Blinking Cursor" = false
+cursor-style-blink = false
+# iTerm2 Columns 80 / Rows 25
+window-width = 80
+window-height = 25
+# iTerm2 "Transparency" = 0, "Blur" = false
+background-opacity = 1
+background-blur = false
+# iTerm2 "Terminal Type" = xterm-256color (Ghostty's own default is xterm-ghostty)
+term = xterm-256color
+# iTerm2 "Prompt Before Closing 2" = false
+confirm-close-surface = false
+# iTerm2 "Unlimited Scrollback" = true. Ghostty caps scrollback in BYTES, with no
+# unlimited setting; this is 1 GiB, an approximation, not a faithful port.
+scrollback-limit = 1073741824
+
+# --- dropped: no Ghostty equivalent ---
+# Bold Color         #ffffff  (bold-is-bright covers the intent)
+# Link Color         #005cbb  (Ghostty underlines links in the foreground colour)
+# Badge Color        #ff2600  (iTerm2 badges have no counterpart)
+# Cursor Guide Color #b3ecff  (no cursor guide feature)
+# Visual Bell = true          (no visual-bell setting; Ghostty's bell is audible/none)
+# Window Type, Icon, Guid, Tags, Jobs to Ignore, Keyboard Map — iTerm2-only.
+#
+# "Working Directory" was /Users/jakubkawa — a path from the old machine.
+# Deliberately not ported. Set `working-directory` here if you want that behaviour.

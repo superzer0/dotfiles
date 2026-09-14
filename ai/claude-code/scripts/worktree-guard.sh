@@ -10,7 +10,33 @@ WORKTREES=$ROOT/claude-worktrees
 target=$(jq -r '.tool_input.file_path // .tool_input.notebook_path // empty' 2>/dev/null) || exit 0
 [ -n "$target" ] || exit 0
 
-dir=$(realpath -m "$(dirname -- "$target")" 2>/dev/null) || exit 0
+# BSD realpath (macOS) has no -m. With the `|| exit 0` below, `realpath -m`
+# there fails and the guard silently stops guarding, so normalise portably:
+# GNU realpath when it exists, otherwise resolve the nearest existing ancestor
+# and re-append the tail that does not exist yet.
+REALPATH_M=
+if command -v grealpath >/dev/null 2>&1; then
+  REALPATH_M=grealpath
+elif realpath -m / >/dev/null 2>&1; then
+  REALPATH_M=realpath
+fi
+
+abspath() {
+  if [ -n "$REALPATH_M" ]; then
+    "$REALPATH_M" -m "$1"
+    return
+  fi
+  local p=$1 tail=
+  case $p in /*) ;; *) p=$PWD/$p ;; esac
+  while [ ! -d "$p" ] && [ "$p" != / ]; do
+    tail=$(basename -- "$p")${tail:+/$tail}
+    p=$(dirname -- "$p")
+  done
+  p=$(cd -P -- "$p" 2>/dev/null && pwd) || return 1
+  if [ -n "$tail" ]; then printf '%s/%s\n' "${p%/}" "$tail"; else printf '%s\n' "$p"; fi
+}
+
+dir=$(abspath "$(dirname -- "$target")" 2>/dev/null) || exit 0
 
 case "$dir/" in
   "$WORKTREES"/*) exit 0 ;;  # already inside a central worktree
