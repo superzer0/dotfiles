@@ -8,20 +8,31 @@ then
 fi
 
 #kubectl autocomplete
-source <(kubectl completion zsh)
+if (( $+commands[kubectl] )); then
+  source <(kubectl completion zsh)
+fi
 
 # AZ autocomplete
-source $(brew --prefix)/etc/bash_completion.d/az
+_az_completion="$(brew --prefix)/etc/bash_completion.d/az"
+[[ -r $_az_completion ]] && source $_az_completion
+unset _az_completion
 
-# my plugins
-plugins=(git kubectl kubectx helm)
+# NOTE: plugins=() and ZSH_THEME= must be set BEFORE `source $ZSH/oh-my-zsh.sh`.
+# This file is sourced at the END of ~/.zshrc (see MANUAL STEPS below), so both
+# are too late to take effect here — set them in ~/.zshrc itself. Kept for
+# reference only:
+#   plugins=(git kubectl kubectx helm)
+#   ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # -- Powerlevel10k --
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-ZSH_THEME="powerlevel10k/powerlevel10k"
 
-eval "$(gh copilot alias -- zsh)"
+# gh copilot alias — needs both gh and the gh-copilot extension
+# (gh extension install github/gh-copilot), which in turn needs `gh auth login`.
+if (( $+commands[gh] )) && gh copilot --version &>/dev/null; then
+  eval "$(gh copilot alias -- zsh)"
+fi
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
@@ -47,8 +58,13 @@ export K9S_EDITOR='code --wait'
 
 
 # -- MANUAL STEPS --
-## Source this file in the default .zshrc
-# echo "\n\n# Personal config\nsource ~/repo/dotfiles/.zshrc_osx\n" >> ~/.zshrc
+## In ~/.zshrc, in THIS order — the first two must precede oh-my-zsh:
+#   eval "$(/opt/homebrew/bin/brew shellenv)"   # brew on PATH; this file calls `brew --prefix`
+#   ZSH_THEME="powerlevel10k/powerlevel10k"
+#   plugins=(git kubectl kubectx helm)
+#   source $ZSH/oh-my-zsh.sh
+#   export CLAUDE_REPO_ROOT="$HOME/repo"
+#   source ~/repo/dotfiles/.zshrc_osx
 #
 # Download iTerm Materials theme from inside this zsh theme:
 # https://github.com/carloscuesta/materialshell/tree/master/shell-color-themes#iterm

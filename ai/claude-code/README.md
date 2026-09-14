@@ -147,3 +147,31 @@ that file for why.
 - The `worktree-guard.sh` path in `hooks` is the one to get right first: a hook
   whose command doesn't resolve fails open, and the guard silently stops
   guarding.
+
+## macOS notes
+
+Bootstrapped on macOS 26 (Tahoe, arm64). Differences from the Linux instructions
+above:
+
+- **Paths.** `settings.json` ships `/home/YOUR_USER`; on macOS that is
+  `/Users/<you>`. The same caveat applies — Claude Code does not expand `~` in
+  `sandbox.filesystem.allowWrite`, and an unexpanded path grants nothing.
+- **`realpath -m`.** BSD `realpath` has no `-m`, so on stock macOS the
+  `realpath -m` call in `worktree-guard.sh` failed and, because the line ends
+  `|| exit 0`, the hook exited 0 and **the guard silently stopped guarding**.
+  It now prefers `grealpath` (Homebrew `coreutils`, added to the `Brewfile`) and
+  falls back to a pure-shell normaliser, so it works with or without coreutils.
+- **Homebrew 7 tap trust.** Third-party taps must be trusted explicitly before
+  `brew bundle` will load a formula from them:
+  `brew trust --formula hashicorp/tap/terraform`. Untrusted taps are skipped
+  with a warning, and `brew bundle` can exit 0 having installed nothing from
+  them — check with `brew bundle check`.
+- **`brew bundle --no-lock`** was removed in Homebrew 7. Passing it prints the
+  usage text and **exits 0 without installing anything**.
+- **rtk config path** is `~/Library/Application Support/rtk/config.toml`, not
+  `~/.config/rtk/config.toml`. Relevant if these dotfiles are synced with Linux
+  machines.
+- **Prompt.** Use oh-my-zsh + powerlevel10k (`.p10k.zsh`), not the `oh-my-posh`
+  setup in `.profile`, which is the Linux/bash path.
+- **Terminal.** `ghostty/config` is a port of the iTerm2 profile
+  `JakubDefault.json`. Validate with `ghostty +validate-config`.
