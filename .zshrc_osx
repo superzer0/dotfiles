@@ -28,10 +28,21 @@ unset _az_completion
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# gh copilot alias — needs both gh and the gh-copilot extension
-# (gh extension install github/gh-copilot), which in turn needs `gh auth login`.
-if (( $+commands[gh] )) && gh copilot --version &>/dev/null; then
-  eval "$(gh copilot alias -- zsh)"
+# gh copilot alias — only eval what the command actually produced.
+#
+# Probing with `gh copilot --version` is not enough. When the standalone GitHub
+# Copilot CLI (Homebrew `copilot`) is on PATH, `gh copilot` forwards to it:
+# `--version` succeeds, but that CLI has no `alias` subcommand, so
+# `gh copilot alias -- zsh` prints a usage error to stderr, writes nothing to
+# stdout — and still exits 0. Testing the exit status would pass and the eval
+# would spray that error into every new shell.
+#
+# Capturing stdout with stderr discarded is the reliable test: empty means there
+# is nothing to eval, whichever copilot implementation answered.
+if (( $+commands[gh] )); then
+  _gh_copilot_alias=$(gh copilot alias -- zsh 2>/dev/null)
+  [[ -n $_gh_copilot_alias ]] && eval "$_gh_copilot_alias"
+  unset _gh_copilot_alias
 fi
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
