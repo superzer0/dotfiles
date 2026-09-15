@@ -233,6 +233,18 @@ above:
 - **Paths.** `settings.json` ships `/home/YOUR_USER`; on macOS that is
   `/Users/<you>`. The same caveat applies — Claude Code does not expand `~` in
   `sandbox.filesystem.allowWrite`, and an unexpanded path grants nothing.
+- **Go CLIs cannot verify TLS under Seatbelt** without
+  `"allowMachLookup": ["com.apple.trustd.agent"]`, now in
+  `sandbox.network`. Go uses Security.framework rather than a CA file, and that
+  talks to the `trustd` daemon over Mach IPC, which the sandbox blocks by
+  default. Every Go binary fails the same way — `gh` and `terraform` both
+  returned `tls: failed to verify certificate: x509: OSStatus -26276` while
+  `curl` and `git` to the same hosts worked. The allowlist and the proxy are
+  not involved (the proxy is a plain CONNECT tunnel; the genuine leaf cert
+  arrives intact), and neither `SSL_CERT_FILE` nor
+  `GODEBUG=x509usefallbackroots=1` helps — Go ignores both on darwin. The key
+  is a no-op on Linux. See the `allowMachLookup` note in the Claude Code
+  sandboxing docs.
 - **`realpath -m`.** BSD `realpath` has no `-m`, so on stock macOS the
   `realpath -m` call in `hooks/worktree-guard.sh` failed and, because the line
   ends `|| exit 0`, the hook exited 0 and **the guard silently stopped guarding**.
