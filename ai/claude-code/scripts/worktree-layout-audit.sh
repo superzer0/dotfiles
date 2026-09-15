@@ -17,11 +17,19 @@ REPO_ROOT=${CLAUDE_REPO_ROOT:-$HOME/repo}
 PROJECTS_DIR=$HOME/.claude/projects
 LOG=$HOME/.claude/worktree-layout-audit.log
 
-log() { printf '[%s] %s\n' "$(date -Is)" "$*" >> "$LOG"; }
+# `date -Is` is GNU-only; BSD date rejects -I. This spelling works on both.
+log() { printf '[%s] %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" >> "$LOG"; }
 
 log "=== layout audit run start ==="
 
-strays=$(ls "$PROJECTS_DIR" 2>/dev/null | grep '^-home-YOUR_USER-repo-' | grep -v '^-home-YOUR_USER-repo-claude-worktrees-')
+# Claude Code names a project dir after its path with '/' AND '.' replaced by
+# '-' (verified: $HOME/repo for user j.kawawebcon.com becomes
+# '-Users-j-kawawebcon-com-repo'). The prefix was hardcoded as
+# '-home-YOUR_USER-repo-', which is both an unsubstituted placeholder and
+# Linux-shaped, so the audit silently matched nothing and reported "no stray
+# session dirs" forever. Derive it from REPO_ROOT instead.
+slug=$(printf '%s' "$REPO_ROOT" | tr './' '--')
+strays=$(ls "$PROJECTS_DIR" 2>/dev/null | grep "^${slug}-" | grep -v "^${slug}-claude-worktrees-")
 if [ -n "$strays" ]; then
   log "STRAY session dirs found:"
   while IFS= read -r d; do log "  - $d"; done <<< "$strays"

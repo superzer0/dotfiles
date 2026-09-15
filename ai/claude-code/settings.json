@@ -199,7 +199,8 @@
       ],
       "strictAllowlist": false,
       "allowAllUnixSockets": true,
-      "allowLocalBinding": true
+      "allowLocalBinding": true,
+      "allowMachLookup": ["com.apple.trustd.agent"]
     },
     "filesystem": {
       "allowWrite": [
