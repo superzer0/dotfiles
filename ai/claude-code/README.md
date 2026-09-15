@@ -1,21 +1,22 @@
 # Claude Code setup
 
 The portable half of my `~/.claude` configuration: sandbox settings, four hooks,
-the worktree policy, a maintenance layer, a starter memory set, and the list of
-skills I install. Every company-specific host, path, repo name and identifier has
-been stripped — placeholders are marked `example.com`, `YOUR_USER` or
-`None configured`.
+the worktree policy, a maintenance layer, the `/implement` command, a starter
+memory set, and the list of skills I install. Every company-specific host, path,
+repo name and identifier has been stripped — placeholders are marked
+`example.com`, `YOUR_USER` or `None configured`.
 
 ## Install
 
 Copy the standalone files:
 
 ```sh
-mkdir -p ~/.claude/rules ~/.claude/hooks/tests
+mkdir -p ~/.claude/rules ~/.claude/hooks/tests ~/.claude/commands
 cp rules/*.md         ~/.claude/rules/
 cp hooks/*.sh         ~/.claude/hooks/
 cp hooks/tests/*.sh   ~/.claude/hooks/tests/
 cp scripts/*.sh       ~/.claude/
+cp commands/*.md      ~/.claude/commands/
 cp RTK.md             ~/.claude/
 chmod +x ~/.claude/hooks/*.sh ~/.claude/*.sh
 ```
@@ -185,16 +186,40 @@ Markdown in `~/.claude/rules/` is loaded into every session automatically. Two h
 
 The worktree scripts read `CLAUDE_REPO_ROOT` and fall back to `$HOME/repo`.
 
+### `commands/`
+
+- **`implement.md`** (`/implement`) — run an agreed plan end to end: worktree,
+  subagent implements, then the main thread re-runs every command in the agent's
+  evidence bundle rather than trusting its report, routes the diff to the right
+  review agents and skills in parallel, ships a draft PR, and holds until CI is
+  green. Its Constraints block is the part worth stealing on its own: never
+  weaken a check to make it pass (including editing the workflow that grades the
+  change), never bypass a gate, stop on destructive infrastructure plans, stay
+  inside the plan, and treat UNVERIFIED as an acceptable answer.
+
 ### `memory/`
 
-Fourteen starter memories. Four are working preferences (draft PRs, edit the PR
-body rather than commenting, delegate coding to cheaper subagents, publish
-research as Artifacts), one restates the worktree policy for the memory system,
-and the rest are tool facts that each cost real time to learn: the GitHub Actions
-`$/` syntax, the Grafana `folderUid` trap, Loki stream labels vs. structured
-metadata, why `gh pr checks` exit 0 is not CI-green, why overnight cron never
-fires in WSL, the two ways the worktree guard blocks harmless commands, and the
+Twenty-three starter memories, in three groups.
+
+**Working style** — the written form of what `CLAUDE.md` asserts, so the two
+agree instead of the instructions standing alone: brief answers, concise factual
+PRs and docs, minimal scoped diffs, verify before claiming done, draft PRs, edit
+the PR body rather than commenting, delegate coding to cheaper subagents, publish
+research as Artifacts, the non-overridable ban on admin and force merges, and
+what a sandbox denial does and does not license.
+
+**Policy** — the worktree rule and the stale-worktree cleanup criteria, restated
+for the memory system.
+
+**Tool facts**, each of which cost real time to learn: the GitHub Actions `$/`
+syntax, the Grafana `folderUid` trap and the `var-` prefix on panel renders, Loki
+stream labels vs. structured metadata, why `gh pr checks` exit 0 is not CI-green,
+why overnight cron never fires in WSL, the three ways the worktree guard blocks
+harmless commands (`pwsh`, rtk-rewritten git, compound commands), and the
 loopback-only sandbox namespace.
+
+`team-artifacts-in-polish.md` is a personal language preference — swap your own
+language in or delete the file.
 
 Keep them one fact per file. The `description` line is what gets matched during
 recall, so make it specific.

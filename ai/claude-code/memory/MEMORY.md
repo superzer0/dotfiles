@@ -14,3 +14,12 @@
 - [rtk rewrite breaks git in worktrees](rtk-rewrite-breaks-git-in-worktrees.md) — status/log/diff/commit get denied by the worktree guard; use `/usr/bin/git`
 - [Worktree guard blocks compound git/gh](worktree-guard-blocks-compound-git-gh.md) — refuses loops over `.github` paths, `$TMPDIR` in args, quoted jq in `gh -q`; split into plain commands
 - [Sandbox netns is loopback-only](sandbox-netns-is-loopback-only.md) — docker daemon reachable over its socket, published ports and container IPs are not
+- [Conciseness preference](feedback-conciseness.md) — brief answers, core fact first, expand only on request
+- [PR and docs writing style](pr-docs-writing-style.md) — concise and factual, English only, what/why/how verified; `gh pr edit`, not a new comment
+- [Minimal, scoped changes](minimal-scoped-changes.md) — plain constant over derived value; no unrequested refactors, never merge PRs
+- [Verify before claiming done](verify-before-claiming-done.md) — full dashboard render / terraform plan / live query / test counts, then a ledger
+- [Never admin or force-merge PRs](never-admin-or-force-merge-prs.md) — three layers: deny rules, `merge-guard.sh`, `autoMode.hard_deny`
+- [Sandbox failure: propose, don't bypass](sandbox-fallback-retry-unsandboxed.md) — only TMPDIR/proxy get one unsandboxed retry; never treat a masked read as "file empty"
+- [Worktree guard blocks pwsh](worktree-guard-blocks-pwsh.md) — every `pwsh` invocation denied in an isolated session, `-File` and absolute path included
+- [get_panel_image needs var- prefixed variables](grafana-panel-render-var-prefix.md) — without it a render silently uses saved defaults
+- [Team artifacts in Polish](team-artifacts-in-polish.md) — personal preference; swap your own language or drop it
