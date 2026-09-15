@@ -199,7 +199,7 @@ The worktree scripts read `CLAUDE_REPO_ROOT` and fall back to `$HOME/repo`.
 
 ### `memory/`
 
-Twenty-three starter memories, in three groups.
+Twenty-two starter memories, in three groups.
 
 **Working style** — the written form of what `CLAUDE.md` asserts, so the two
 agree instead of the instructions standing alone: brief answers, concise factual
@@ -214,9 +214,9 @@ for the memory system.
 **Tool facts**, each of which cost real time to learn: the GitHub Actions `$/`
 syntax, the Grafana `folderUid` trap and the `var-` prefix on panel renders, Loki
 stream labels vs. structured metadata, why `gh pr checks` exit 0 is not CI-green,
-why overnight cron never fires in WSL, the three ways the worktree guard blocks
-harmless commands (`pwsh`, rtk-rewritten git, compound commands), and the
-loopback-only sandbox namespace.
+why overnight cron never fires in WSL, the two ways a worktree-isolated session
+refuses harmless commands (rtk-rewritten git, and compound commands with
+computed values), and the loopback-only sandbox namespace.
 
 `team-artifacts-in-polish.md` is a personal language preference — swap your own
 language in or delete the file.

@@ -20,6 +20,5 @@
 - [Verify before claiming done](verify-before-claiming-done.md) — full dashboard render / terraform plan / live query / test counts, then a ledger
 - [Never admin or force-merge PRs](never-admin-or-force-merge-prs.md) — three layers: deny rules, `merge-guard.sh`, `autoMode.hard_deny`
 - [Sandbox failure: propose, don't bypass](sandbox-fallback-retry-unsandboxed.md) — only TMPDIR/proxy get one unsandboxed retry; never treat a masked read as "file empty"
-- [Worktree guard blocks pwsh](worktree-guard-blocks-pwsh.md) — every `pwsh` invocation denied in an isolated session, `-File` and absolute path included
 - [get_panel_image needs var- prefixed variables](grafana-panel-render-var-prefix.md) — without it a render silently uses saved defaults
 - [Team artifacts in Polish](team-artifacts-in-polish.md) — personal preference; swap your own language or drop it
