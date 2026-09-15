@@ -7,7 +7,8 @@ set -uo pipefail
 REPO_ROOT=${CLAUDE_REPO_ROOT:-$HOME/repo}
 LOG=$HOME/.claude/fetch-prune-repos.log
 
-log() { printf '[%s] %s\n' "$(date -Is)" "$*" >> "$LOG"; }
+# `date -Is` is GNU-only; BSD date rejects -I. This spelling works on both.
+log() { printf '[%s] %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" >> "$LOG"; }
 
 log "=== fetch --prune run start ==="
 
