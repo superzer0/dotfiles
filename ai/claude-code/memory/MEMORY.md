@@ -9,10 +9,8 @@
 - [Grafana publish needs folderUid](grafana-dashboard-publish-needs-folderuid.md) — omitting it moves the dashboard to root and can lock a scoped service account out
 - [Loki stream labels vs structured metadata](loki-stream-labels-vs-structured-metadata.md) — structured metadata returns zero inside `{}`; filter it after a `|`
 - [Stale worktree cleanup policy](stale-worktree-cleanup-policy.md) — cull worktrees untouched 7+ days; flag (don't delete) dirty trees or open PRs
-- [WSL cron misses overnight slots](wsl-cron-misses-overnight-slots.md) — 04:00 jobs silently never fire; `@reboot` + date stamp + `flock` is the fix
 - [`gh pr checks --watch` exits 0 too early](gh-pr-checks-watch-exits-zero-before-checks-register.md) — right after a push it reports "no checks reported" and exits 0; resolve the run id and use `gh run view`
 - [rtk rewrite breaks git in worktrees](rtk-rewrite-breaks-git-in-worktrees.md) — status/log/diff/commit get denied by the worktree guard; use `/usr/bin/git`
-- [Worktree guard blocks compound git/gh](worktree-guard-blocks-compound-git-gh.md) — refuses loops over `.github` paths, `$TMPDIR` in args, quoted jq in `gh -q`; split into plain commands
 - [Sandbox netns is loopback-only](sandbox-netns-is-loopback-only.md) — docker daemon reachable over its socket, published ports and container IPs are not
 - [Conciseness preference](feedback-conciseness.md) — brief answers, core fact first, expand only on request
 - [PR and docs writing style](pr-docs-writing-style.md) — concise and factual, English only, what/why/how verified; `gh pr edit`, not a new comment
@@ -21,4 +19,3 @@
 - [Never admin or force-merge PRs](never-admin-or-force-merge-prs.md) — three layers: deny rules, `merge-guard.sh`, `autoMode.hard_deny`
 - [Sandbox failure: propose, don't bypass](sandbox-fallback-retry-unsandboxed.md) — only TMPDIR/proxy get one unsandboxed retry; never treat a masked read as "file empty"
 - [get_panel_image needs var- prefixed variables](grafana-panel-render-var-prefix.md) — without it a render silently uses saved defaults
-- [Team artifacts in Polish](team-artifacts-in-polish.md) — personal preference; swap your own language or drop it

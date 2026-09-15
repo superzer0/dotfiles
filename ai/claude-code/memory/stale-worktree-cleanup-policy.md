@@ -6,7 +6,7 @@ metadata:
   type: project
 ---
 
-`~/.claude/stale-worktree-cleanup.sh` removes worktrees under `~/repo/claude-worktrees/` with no activity in 7+ days. It is a plain bash/git script in the **real user crontab** (not a `CronCreate` session job — `CronList` shows nothing because it only reports the current session), invoked via `~/.claude/daily-maintenance.sh`. See [[wsl-cron-misses-overnight-slots]].
+`~/.claude/stale-worktree-cleanup.sh` removes worktrees under `~/repo/claude-worktrees/` with no activity in 7+ days. It is a plain bash/git script in the **real user crontab** (not a `CronCreate` session job — `CronList` shows nothing because it only reports the current session), invoked via `~/.claude/daily-maintenance.sh`, which is stamped to one run per day and triggered from both `@reboot` and the timed slot — an overnight cron slot never fires on a machine that is powered off at night.
 
 **Criteria for "stale":** last activity = newer of (a) `git log -1 --format=%ct` on the checked-out branch and (b) newest mtime among non-`.git` files (catches uncommitted work). Older than 7 days = candidate.
 

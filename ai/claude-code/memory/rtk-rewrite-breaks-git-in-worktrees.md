@@ -22,4 +22,4 @@ rewrite-visibility one.
 
 **How to apply:** in a worktree session, reach for `/usr/bin/git` for anything read-only or
 committing, and keep each git invocation a single plain command. See
-[[worktree-only-edits]] and [[worktree-guard-blocks-compound-git-gh]].
+[[worktree-only-edits]].
