@@ -1,0 +1,22 @@
+# Example crontab for the maintenance scripts in this directory.
+# Install with `crontab -e`; adjust the paths to where you put the scripts.
+#
+# m h  dom mon dow   command
+
+# cron's default PATH is /usr/bin:/bin, which has no gh and no brew. Without
+# this line the cleanup script's open-PR guard degrades silently — it once
+# deleted the worktrees of two open PRs. stale-worktree-cleanup.sh now aborts
+# when gh is missing rather than deleting blind, but set the PATH anyway.
+PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/bin:/usr/bin:/bin
+
+# Weekly package upgrade (drop this if you don't use Homebrew).
+30 9 * * 1 brew upgrade --quiet && brew cleanup -s
+
+# Weekly, report-only: stray session dirs and rogue worktrees.
+0 5 * * 0 $HOME/.claude/worktree-layout-audit.sh
+
+# A laptop or WSL instance is usually off at 04:00, so the timed slot alone
+# skips days. daily-maintenance.sh is stamped to one run per day and takes
+# whichever trigger fires first; run it from both.
+@reboot sleep 60 && $HOME/.claude/daily-maintenance.sh
+0 4 * * * $HOME/.claude/daily-maintenance.sh

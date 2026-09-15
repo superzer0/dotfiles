@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Create (or reuse) this session's git worktree for a repository under $REPO_ROOT.
+# Create (or reuse) this session's git worktree for a repository under ~/repo.
 #
 #   usage: new-worktree.sh <repo-dir-name> <topic-slug> [base-ref]
 #
 # Prints the worktree path on stdout; pass it to EnterWorktree.
-# Layout: $REPO_ROOT/claude-worktrees/<repo>.<topic-slug>-<session-id-prefix>
+# Layout: ~/repo/claude-worktrees/<repo>.<topic-slug>-<session-id-prefix>
 # Branch: claude/<topic-slug>-<session-id-prefix>
 set -euo pipefail
 
@@ -31,7 +31,10 @@ fi
 if git -C "$src" show-ref --verify --quiet "refs/heads/$branch"; then
   git -C "$src" worktree add "$path" "$branch" >&2
 else
-  git -C "$src" worktree add "$path" -b "$branch" "$base" >&2
+  # --no-track: if the sandbox mounts .git/config read-only, an upstream write
+  # always fails while git still prints "set up to track", leaving the branch
+  # silently untracked. Not tracking it in the first place is honest.
+  git -C "$src" worktree add --no-track "$path" -b "$branch" "$base" >&2
 fi
 
 echo "$path"

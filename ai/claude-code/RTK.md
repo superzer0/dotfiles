@@ -26,4 +26,4 @@ which rtk             # Verify correct binary
 All other commands are automatically rewritten by the Claude Code hook.
 Example: `git status` → `rtk git status` (transparent, 0 tokens overhead)
 
-Refer to CLAUDE.md for full command reference.
+The hook runs as `~/.claude/hooks/rtk-hook.sh`, which keeps rtk's rewrite but strips its permission decision and leaves `permissions.ask`-gated commands unrewritten; `merge-guard.sh` and `cred-guard.sh` run alongside it. Full command reference: `rtk --help`.
