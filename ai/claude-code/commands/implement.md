@@ -55,8 +55,7 @@ Its prompt must contain: the plan text verbatim; the Constraints section above, 
 README.md, CLAUDE.md and AGENTS.md in every touched repo where the change affects what that file
 documents"; "commit on the current branch with SSH signing (`git commit -S`), do not push"; "write
 every intermediate file under `$TMPDIR`, never `/tmp`"; the name of the domain skill it must invoke
-before editing (same routing as step 4 — for a Terraform repo that might be
-`platform-terraform:platform-terraform`); and this report shape.
+before editing (same routing as step 4); and this report shape.
 
 If SSH signing fails, do not deny or work around `~/.ssh` reads to get past it — report the exact
 error and stop; the fix is an agent config issue, not a permission to bypass.
@@ -103,7 +102,6 @@ differently: check which table a row is in.
 
 | Change | Agent |
 | --- | --- |
-| Terraform repo | `platform-terraform:platform-tf-reviewer` |
 | `*.ps1`, or workflow steps that can swallow errors | `pr-review-toolkit:silent-failure-hunter` |
 
 **Skills** — the `Skill` tool, in the main thread, one after another:
